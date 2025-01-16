@@ -283,6 +283,7 @@ def read_s1_sar_gdf(conf):
     s1_sar_proj4str = '+proj=stere +lat_0=90 +lon_0=0 +k=1 +x_0=0 +y_0=0 +ellps=WGS84 +units=m +no_defs +type=crs'
     gdf = gpd.read_feather(conf.s1_sar_gdf_file).set_crs(s1_sar_proj4str).to_crs(conf.proj4)
     gdf.index = gdf['date']
+    gdf = gdf.sort_index(ascending=True)
     return gdf
 
 def get_overlapping_gdf(conf, gdf, dst_polygon, plot=False):
